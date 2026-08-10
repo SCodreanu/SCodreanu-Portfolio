@@ -1,0 +1,20 @@
+.contact {
+  background-color: var(--bg-color);
+  text-align: center;
+}
+
+.contact-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-text {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+.contact-btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+}

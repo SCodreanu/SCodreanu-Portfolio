@@ -1,0 +1,6 @@
+.greetings {
+    color: var(--accent-color);
+    font-family: monospace;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
