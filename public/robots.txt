@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://scodreanu-portfolio.vercel.app/sitemap.xml
