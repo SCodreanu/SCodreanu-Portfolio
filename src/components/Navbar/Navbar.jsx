@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="nav-container">
         <a href="#home" className="logo"></a>
         <ul className="nav-links">
-          <li className='logo-img'><img src="/src/assets/img/favicon.jpeg" alt="logo" /></li>
+          <li className='logo-img'><img src="/favicon.jpeg" alt="logo" /></li>
           <li><a href="#home">Home</a></li>
           <li><a href="#about">Chi Sono</a></li>
           <li><a href="#skills">Skills</a></li>
