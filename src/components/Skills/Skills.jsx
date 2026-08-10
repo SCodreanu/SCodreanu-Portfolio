@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import {
   FaHtml5, FaCss3Alt, FaBootstrap, FaWordpress, FaReact,
   FaAngular, FaJava, FaNodeJs, FaLinux, FaFigma, FaSearch,
@@ -19,7 +19,9 @@ const SkillCard = ({ category }) => {
       <div className="skills-list">
         {category.skills.map((skill, index) => (
           <div key={index} className="skill-item">
-            <div className="skill-icon">{skill.icon}</div>
+            <div className="skill-icon">
+              {React.cloneElement(skill.icon, { "aria-hidden": "true" })}
+            </div>
             <span className="skill-name">{skill.name}</span>
           </div>
         ))}
@@ -83,6 +85,5 @@ const Skills = () => {
     </section>
   );
 };
-
 
 export default Skills;

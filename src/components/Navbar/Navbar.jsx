@@ -18,10 +18,12 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="nav-container">
-        <a href="#home" className="logo"></a>
+        {/* FIX: Aggiunto aria-label al link del logo per dare un testo leggibile */}
+        <a href="#home" className="logo" aria-label="Torna alla Home"></a>
+
         <ul className="nav-links">
           <li className="logo-img">
-            <img src="/favicon.jpeg" alt="logo" />
+            <img src="/favicon.jpeg" alt="Logo Stefan Codreanu" />
           </li>
           <li>
             <a href="#home">Home</a>
@@ -38,54 +40,65 @@ const Navbar = () => {
           <li>
             <a href="#contact">Contattami</a>
           </li>
-          <div className="language-toggle">
-            <div
-              className="custom-lang-select"
-              onClick={() => setIsLangOpen(!isLangOpen)}
-            >
-              <div className="selected-lang">
-                {currentLang === "it" ? (
-                  <IT
-                    title="Italiano"
-                    style={{ width: "30px", borderRadius: "4px" }}
-                  />
-                ) : (
-                  <GB
-                    title="Inglese"
-                    style={{ width: "30px", borderRadius: "4px" }}
-                  />
-                )}
-              </div>
-              {isLangOpen && (
-                <div className="lang-options">
-                  <div
-                    className="lang-option"
-                    onClick={() => {
-                      setCurrentLang("it");
-                      setIsLangOpen(false);
-                    }}
-                  >
+
+          <li>
+            <div className="language-toggle">
+              <div
+                className="custom-lang-select"
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                role="button"
+                tabIndex={0}
+                aria-expanded={isLangOpen}
+                aria-label="Seleziona lingua"
+              >
+                <div className="selected-lang">
+                  {currentLang === "it" ? (
                     <IT
                       title="Italiano"
+                      aria-hidden="true"
                       style={{ width: "30px", borderRadius: "4px" }}
                     />
-                  </div>
-                  <div
-                    className="lang-option"
-                    onClick={() => {
-                      setCurrentLang("en");
-                      setIsLangOpen(false);
-                    }}
-                  >
+                  ) : (
                     <GB
                       title="Inglese"
+                      aria-hidden="true"
                       style={{ width: "30px", borderRadius: "4px" }}
                     />
-                  </div>
+                  )}
                 </div>
-              )}
+                {isLangOpen && (
+                  <div className="lang-options">
+                    <div
+                      className="lang-option"
+                      onClick={() => {
+                        setCurrentLang("it");
+                        setIsLangOpen(false);
+                      }}
+                    >
+                      <IT
+                        title="Italiano"
+                        aria-hidden="true"
+                        style={{ width: "30px", borderRadius: "4px" }}
+                      />
+                    </div>
+                    <div
+                      className="lang-option"
+                      onClick={() => {
+                        setCurrentLang("en");
+                        setIsLangOpen(false);
+                      }}
+                    >
+                      <GB
+                        title="Inglese"
+                        aria-hidden="true"
+                        style={{ width: "30px", borderRadius: "4px" }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          </li>
         </ul>
       </div>
     </nav>
