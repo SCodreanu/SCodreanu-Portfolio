@@ -1,19 +1,26 @@
-import React from 'react';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import './Footer.css';
 
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="container footer-container">
-        <div className="footer-socials">
-          <a href="https://github.com/SCodreanu" aria-label="GitHub"><FaGithub /></a>
-          <a href="https://www.linkedin.com/in/stefan-codreanu-000380366/" aria-label="LinkedIn"><FaLinkedin /></a>
-        </div>
-        <p className="footer-text">
-          &copy; {new Date().getFullYear()} Codreanu Stefan Tutti i diritti riservati. <br />
+      <div className="footer-content">
+        <p>© {new Date().getFullYear()} Stefan Codreanu. Tutti i diritti riservati.</p>
+        <p className="footer-disclaimer">
+          Sito personale a scopo rappresentativo e non commerciale. Nessuna attività d'impresa esercitata ai sensi dell'art. 35 DPR 633/72.
         </p>
-        <p className="footer-text">Realizzato con React | HTML | CSS | JS</p>
+        <div className="footer-links">
+          <a href="../public/policy/privacy-policy.html" target="_blank" rel="noopener noreferrer">
+            Privacy Policy
+          </a>
+          <span> | </span>
+          <a href="../public/policy/cookie-policy.html" target="_blank" rel="noopener noreferrer">
+            Cookie Policy
+          </a>
+          <span> | </span>
+          <a href="../public/policy/accessibility.html" target="_blank" rel="noopener noreferrer">
+            Dichiarazione di Accessibilità
+          </a>
+        </div>
       </div>
     </footer>
   );

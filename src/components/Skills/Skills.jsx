@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   FaHtml5, FaCss3Alt, FaBootstrap, FaWordpress, FaReact,
-  FaAngular, FaJava, FaNodeJs, FaLinux, FaFigma, FaSearch,
+  FaAngular, FaJava, FaLinux, FaFigma, FaSearch,
   FaServer, FaGitAlt, FaRobot
 } from 'react-icons/fa';
 import {

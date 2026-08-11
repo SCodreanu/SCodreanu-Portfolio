@@ -1,25 +1,35 @@
-import React from 'react';
+import { Suspense, lazy } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
-import Skills from './components/Skills/Skills';
-import Projects from './components/Projects/Projects';
-import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import { SpeedInsights } from "@vercel/speed-insights/react";
+
+const Skills = lazy(() => import('./components/Skills/Skills'));
+const Projects = lazy(() => import('./components/Projects/Projects'));
+const Contact = lazy(() => import('./components/Contact/Contact'));
 
 const App = () => {
   return (
     <>
-      <Navbar />
-      <main>
+      <header>
+        <Navbar />
+      </header>
+
+      <main id="main-content">
         <Hero />
         <About />
-        <Skills />
-        <Projects />
-        <Contact />
+        <Suspense fallback={null}>
+          <Skills />
+          <Projects />
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
+
+      <footer>
+        <Footer />
+      </footer>
+
       <SpeedInsights />
     </>
   );

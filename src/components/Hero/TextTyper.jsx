@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './TextTyper.css';
 
 const TextTyper = ({ texts, typingSpeed = 150, deletingSpeed = 100, pauseTime = 100 }) => {
@@ -14,8 +14,10 @@ const TextTyper = ({ texts, typingSpeed = 150, deletingSpeed = 100, pauseTime = 
     if (!isDeleting && charIndex === fullText.length) {
       timerId = setTimeout(() => setIsDeleting(true), pauseTime);
     } else if (isDeleting && charIndex === 0) {
-      setIsDeleting(false);
-      setTextIndex((prev) => (prev + 1) % texts.length);
+      timerId = setTimeout(() => {
+        setIsDeleting(false);
+        setTextIndex((prev) => (prev + 1) % texts.length);
+      }, 0);
     } else {
       const currentSpeed = isDeleting ? deletingSpeed : typingSpeed;
       timerId = setTimeout(() => {

@@ -1,5 +1,5 @@
 import { IT, GB } from "country-flag-icons/react/3x2";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Navbar.css";
 
 const Navbar = () => {
