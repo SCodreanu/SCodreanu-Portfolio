@@ -1,0 +1,35 @@
+.cursor-main {
+  --size: 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: var(--size);
+  margin-top: calc(var(--size) / -2);
+  margin-left: calc(var(--size) / -2);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+  background-color: var(--accent-color);
+  box-shadow: 0 0 20px var(--accent-color);
+  mix-blend-mode: difference;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease,
+    margin 0.3s ease;
+}
+
+.cursor-hover {
+  --size: 48px;
+}
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  a,
+  button {
+    cursor: none;
+  }
+}

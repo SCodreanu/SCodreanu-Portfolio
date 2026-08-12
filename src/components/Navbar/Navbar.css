@@ -79,34 +79,6 @@ html {
 }
 
 
-.nav-links a:not(.btn) {
-  font-weight: 500;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  transition: var(--transition);
-  position: relative;
-}
-
-
-
-
-.nav-links a:not(.btn)::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background: var(--accent-gradient);
-  transition: width 0.3s ease;
-}
-
-
-.nav-links a:not(.btn):hover::after {
-  width: 100%;
-}
-
-
 
 
 

@@ -18,11 +18,15 @@
 
 
 .name {
-  font-size: clamp(8rem, 5vw, 3rem);
+  font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 800;
   line-height: 1.1;
   color: var(--text-primary);
   margin-bottom: 0.5rem;
+}
+
+.name-char {
+  display: inline-block;
 }
 
 

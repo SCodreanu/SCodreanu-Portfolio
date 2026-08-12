@@ -1,5 +1,6 @@
 import { IT, GB } from "country-flag-icons/react/3x2";
 import { useState, useEffect } from "react";
+import HoverLink from "../HoverLink/HoverLink";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -26,19 +27,19 @@ const Navbar = () => {
             <img src="/favicon.jpeg" alt="Logo Stefan Codreanu" />
           </li>
           <li>
-            <a href="#home">Home</a>
+            <HoverLink href="#home">Home</HoverLink>
           </li>
           <li>
-            <a href="#about">Chi Sono</a>
+            <HoverLink href="#about">Chi Sono</HoverLink>
           </li>
           <li>
-            <a href="#skills">Skills</a>
+            <HoverLink href="#skills">Skills</HoverLink>
           </li>
           <li>
-            <a href="#projects">Progetti</a>
+            <HoverLink href="#projects">Progetti</HoverLink>
           </li>
           <li>
-            <a href="#contact">Contattami</a>
+            <HoverLink href="#contact">Contattami</HoverLink>
           </li>
 
           <li>
