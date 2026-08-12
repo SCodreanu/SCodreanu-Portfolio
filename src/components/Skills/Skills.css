@@ -28,7 +28,6 @@
   transform: translateY(-5px);
 }
 
-/* STICKER */
 
 .sticker-overlay {
   position: absolute;
@@ -50,7 +49,7 @@
   height: 100%;
 }
 
-/* CONTENT */
+
 
 .category-title {
   position: relative;

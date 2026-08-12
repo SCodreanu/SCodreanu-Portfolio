@@ -19,7 +19,6 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="nav-container">
-        {/* FIX: Aggiunto aria-label al link del logo per dare un testo leggibile */}
         <a href="#home" className="logo" aria-label="Torna alla Home"></a>
 
         <ul className="nav-links">

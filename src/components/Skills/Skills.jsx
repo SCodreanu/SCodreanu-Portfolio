@@ -69,8 +69,6 @@ const SkillSticker = ({ id, cardRef }) => {
           src: '/img/peel-me.webp',
           name: 'peel-me.webp',
 
-          // IMPORTANTE:
-          // elimina il padding trasparente predefinito
           padding: 0,
         });
 
@@ -138,7 +136,6 @@ const SkillSticker = ({ id, cardRef }) => {
           wind: 0.25,
           quality: 'high',
 
-          // Sticker grande esattamente quanto la card
           display: {
             width: card.clientWidth,
             height: card.clientHeight,
@@ -147,7 +144,6 @@ const SkillSticker = ({ id, cardRef }) => {
 
         updateSize();
 
-        // Responsive: aggiorna la mesh quando cambia la card
         observer = new ResizeObserver(updateSize);
         observer.observe(card);
 
