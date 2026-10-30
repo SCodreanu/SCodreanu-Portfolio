@@ -1,27 +1,7 @@
-.hover-link {
-  display: inline-block;
-  overflow: hidden;
-  height: 1.4em;
-  line-height: 1.4em;
-  font-weight: 500;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-}
-
-.hover-link-track {
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-.hover-link:hover .hover-link-track {
-  transform: translateY(-1.4em);
-}
-
-.hover-link-line {
-  display: block;
-}
-
-.hover-link-line--accent {
-  color: var(--accent-color);
-}
+.hover-link { display: inline-block; font-weight: 500; color: var(--text-secondary); }
+.hover-link-window { display: block; height: 1.4em; line-height: 1.4em; overflow: hidden; }
+.hover-link-track { display: flex; flex-direction: column; transition: transform .22s ease; }
+.hover-link:hover .hover-link-track, .hover-link:focus-visible .hover-link-track { transform: translateY(-1.4em); }
+.hover-link-line { display: block; line-height: 1.4em; }
+.hover-link-line--accent { color: var(--accent-hover); }
+@media (prefers-reduced-motion: reduce) { .hover-link-track { transition: none; } }

@@ -74,3 +74,5 @@
 .project-details summary { cursor: pointer; color: var(--text-primary); font-weight: 600; }
 .project-details p { margin-top: 1rem; }
 .project-note { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border); font-size: .85rem; color: var(--text-secondary); }
+
+.project-symbol { color: var(--accent-hover); margin-bottom: 1rem; }

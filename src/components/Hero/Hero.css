@@ -55,3 +55,30 @@
     display: flex;
   }
 }
+.hero { overflow: clip; isolation: isolate; }
+.hero::before { content: ''; position: absolute; inset: 0; z-index: -2; pointer-events: none; background: radial-gradient(ellipse at 80% 35%,rgba(55,139,203,.12),transparent 55%); }
+.hero-bg-glow { position: absolute; right: 7%; top: 30%; width: clamp(160px,24vw,330px); aspect-ratio: 1; border: 1px solid rgba(55,139,203,.22); border-radius: 50%; z-index: -1; pointer-events: none; }
+.hero-bg-glow::before, .hero-bg-glow::after { content: ''; position: absolute; inset: 18%; border: 1px dashed rgba(55,139,203,.3); border-radius: 50%; }
+.hero-bg-glow::after { inset: 46%; border: 0; background: #378bcb; }
+.hero-content { animation: intro-arrive .5s ease both; }
+@keyframes intro-arrive { from { opacity: .4; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width:768px) { .hero-bg-glow { right: -80px; top: 18%; opacity: .5; } }
+@media (prefers-reduced-motion:reduce) { .hero-content { animation: none; } }
+
+.name-char { animation: letter-arrive .45s ease both; animation-delay: calc(var(--char-index) * 25ms); }
+@keyframes letter-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion:reduce) { .name-char { animation: none; } }
+
+/* Kinetic type and orbital code artwork, using transform and opacity. */
+.hero .name { perspective: 800px; }
+.hero .name-char { transform-origin: 50% 100%; animation-name: kinetic-letter; animation-duration: .8s; animation-timing-function: cubic-bezier(.16,1,.3,1); }
+@keyframes kinetic-letter { from { opacity: 0; transform: translateY(65px) rotateX(-65deg) rotateZ(5deg); } to { opacity: 1; transform: none; } }
+.hero-code-mark { position: absolute; width: 42%; height: 42%; inset: 29%; color: #38bdf8; opacity: .5; }
+.hero-bg-glow { width: clamp(220px,32vw,440px); top: 24%; right: 3%; }
+.hero-bg-glow::before { inset: 9%; border-style: dashed; border-color: rgba(56,189,248,.4); animation: orbit-turn 24s linear infinite; animation-play-state: paused; }
+.hero-bg-glow::after { inset: 0; width: 12px; height: 12px; top: 50%; left: 50%; border-radius: 50%; box-shadow: 0 0 18px rgba(56,189,248,.5); animation: orbit-dot 14s linear infinite; animation-play-state: paused; }
+.hero.motion-inview .hero-bg-glow::before, .hero.motion-inview .hero-bg-glow::after { animation-play-state: running; }
+@keyframes orbit-turn { to { transform: rotate(360deg); } }
+@keyframes orbit-dot { from { transform: rotate(0deg) translateX(150px); } to { transform: rotate(360deg) translateX(150px); } }
+@media (max-width:768px) { .hero-bg-glow { right: -120px; top: 14%; opacity: .35; } }
+@media (prefers-reduced-motion:reduce) { .hero .name-char, .hero-bg-glow::before, .hero-bg-glow::after { animation: none; } }

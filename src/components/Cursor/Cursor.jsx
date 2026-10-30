@@ -1,55 +1,94 @@
 import { useEffect, useRef } from 'react';
 import './Cursor.css';
 
+const interactiveSelector = 'a, button, summary, input, select, textarea, [role="button"], [data-cursor="hover"]';
 
-const Cursor = () => {
+export default function Cursor() {
   const cursorRef = useRef(null);
 
   useEffect(() => {
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-    if (isTouchDevice || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
     const cursor = cursorRef.current;
-    const mousePos = { x: 0, y: 0 };
-    const cursorPos = { x: 0, y: 0 };
-    let rafId;
+    const finePointer = window.matchMedia('(any-pointer: fine)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const position = { x: 0, y: 0 };
+    const target = { x: 0, y: 0 };
+    let frame = null;
+    let visible = false;
 
-    const handleMouseMove = (e) => {
-      mousePos.x = e.clientX;
-      mousePos.y = e.clientY;
+    const draw = () => {
+      cursor.style.transform = `translate(${position.x}px, ${position.y}px)`;
     };
 
-    const loop = () => {
-      const delay = 6;
-      cursorPos.x += (mousePos.x - cursorPos.x) / delay;
-      cursorPos.y += (mousePos.y - cursorPos.y) / delay;
-      cursor.style.transform = `translate(${cursorPos.x}px, ${cursorPos.y}px)`;
-      rafId = requestAnimationFrame(loop);
+    const animate = () => {
+      frame = null;
+      if (!visible) return;
+      if (reducedMotion.matches) {
+        position.x = target.x;
+        position.y = target.y;
+      } else {
+        position.x += (target.x - position.x) / 6;
+        position.y += (target.y - position.y) / 6;
+      }
+      draw();
+      if (Math.abs(target.x - position.x) > 0.1 || Math.abs(target.y - position.y) > 0.1) {
+        frame = requestAnimationFrame(animate);
+      }
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    rafId = requestAnimationFrame(loop);
+    const hide = () => {
+      visible = false;
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = null;
+      cursor.classList.remove('cursor-visible', 'cursor-hover');
+      document.documentElement.classList.remove('custom-cursor-active');
+    };
 
-    const hoverTargets = document.querySelectorAll('[data-cursor="hover"]');
-    const handleEnter = () => cursor.classList.add('cursor-hover');
-    const handleLeave = () => cursor.classList.remove('cursor-hover');
+    const move = (event) => {
+      if (!finePointer.matches || event.pointerType !== 'mouse') {
+        hide();
+        return;
+      }
+      target.x = event.clientX;
+      target.y = event.clientY;
+      if (!visible || reducedMotion.matches) {
+        position.x = target.x;
+        position.y = target.y;
+        draw();
+      }
+      visible = true;
+      cursor.classList.add('cursor-visible');
+      document.documentElement.classList.add('custom-cursor-active');
+      cursor.classList.toggle('cursor-hover', event.target instanceof Element && Boolean(event.target.closest(interactiveSelector)));
+      if (frame === null && !reducedMotion.matches) frame = requestAnimationFrame(animate);
+    };
 
-    hoverTargets.forEach((el) => {
-      el.addEventListener('mouseenter', handleEnter);
-      el.addEventListener('mouseleave', handleLeave);
-    });
+    const changePreferences = () => {
+      if (!finePointer.matches) hide();
+      else if (visible) {
+        if (frame !== null) cancelAnimationFrame(frame);
+        frame = null;
+        animate();
+      }
+    };
 
+    const leave = (event) => {
+      if (event.relatedTarget === null) hide();
+    };
+
+    document.addEventListener('pointermove', move, { passive: true });
+    document.addEventListener('pointerout', leave);
+    window.addEventListener('blur', hide);
+    finePointer.addEventListener('change', changePreferences);
+    reducedMotion.addEventListener('change', changePreferences);
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(rafId);
-      hoverTargets.forEach((el) => {
-        el.removeEventListener('mouseenter', handleEnter);
-        el.removeEventListener('mouseleave', handleLeave);
-      });
+      hide();
+      document.removeEventListener('pointermove', move);
+      document.removeEventListener('pointerout', leave);
+      window.removeEventListener('blur', hide);
+      finePointer.removeEventListener('change', changePreferences);
+      reducedMotion.removeEventListener('change', changePreferences);
     };
   }, []);
 
-  return <div className="cursor-main" ref={cursorRef} aria-hidden="true"></div>;
-};
-
-export default Cursor;
+  return <div className="cursor-main" ref={cursorRef} aria-hidden="true" />;
+}

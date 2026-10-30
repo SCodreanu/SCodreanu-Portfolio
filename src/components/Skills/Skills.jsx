@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
+import SkillSticker from './SkillSticker';
 
 import {
   FaHtml5,
@@ -31,210 +32,20 @@ import { MdDesignServices } from 'react-icons/md';
 
 import './Skills.css';
 
-const PEEL_RESET_MS = 60_000;
-
-const SkillSticker = ({ id, cardRef }) => {
-  const stickerRef = useRef(null);
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    let timer;
-    let observer;
-
-    const updateSize = () => {
-      const sticker = stickerRef.current;
-      const card = cardRef.current;
-
-      if (!sticker || !card) return;
-
-      sticker.setOptions({
-        display: {
-          width: card.clientWidth,
-          height: card.clientHeight,
-        },
-      });
-    };
-
-    const init = async () => {
-      await customElements.whenDefined('sticker-forge');
-
-      const sticker = stickerRef.current;
-      const card = cardRef.current;
-
-      if (!sticker || !card) return;
-
-      try {
-        await sticker.setSource({
-          type: 'image',
-          src: '/img/peel-me.webp',
-          name: 'peel-me.webp',
-
-          padding: 0,
-        });
-
-        sticker.setOptions({
-          outline: {
-            width: 18,
-            color: '#ffffff',
-          },
-
-          edge: {
-            width: 2.4,
-            strength: 0.7,
-          },
-
-          shadow: {
-            opacity: 0.22,
-            blur: 22,
-            distance: 16,
-            angle: 42,
-            color: '#191823',
-          },
-
-          lighting: {
-            direction: {
-              x: -0.38,
-              y: 0.52,
-              z: 0.76,
-            },
-            intensity: 0.8,
-            ambient: 0.35,
-            softness: 0.6,
-          },
-
-          peel: {
-            radius: 0.12,
-            stiffness: 0.72,
-            grabWidth: 22,
-            maxAngle: 3.55,
-            detachThreshold: 0.74,
-            residue: true,
-            surfaceShadow: true,
-            release: 'snap',
-          },
-
-          sound: {
-            enabled: true,
-            volume: 0.7,
-          },
-
-          back: {
-            color: '#f7f5f2',
-            gloss: 0.7,
-            roughness: 0.3,
-          },
-
-          material: {
-            type: 'original',
-            intensity: 0.86,
-            scale: 1,
-            holographicGrain: 0.72,
-            seed: 0.37,
-          },
-
-          tilt: -3,
-          wind: 0.25,
-          quality: 'high',
-
-          display: {
-            width: card.clientWidth,
-            height: card.clientHeight,
-          },
-        });
-
-        updateSize();
-
-        observer = new ResizeObserver(updateSize);
-        observer.observe(card);
-
-        setShow(true);
-
-        const handlePeelEnd = (event) => {
-          if (event?.detail?.willReset === false) {
-            setShow(false);
-
-            timer = setTimeout(() => {
-              updateSize();
-              setShow(true);
-            }, PEEL_RESET_MS);
-          }
-        };
-
-        sticker.addEventListener('peelend', handlePeelEnd);
-
-        return () => {
-          sticker.removeEventListener('peelend', handlePeelEnd);
-        };
-      } catch (error) {
-        console.error('[SkillSticker]', error);
-      }
-    };
-
-    let cleanup;
-
-    init().then((removeListener) => {
-      cleanup = removeListener;
-    });
-
-    return () => {
-      clearTimeout(timer);
-      observer?.disconnect();
-      cleanup?.();
-    };
-  }, [cardRef]);
-
-  return (
-    <div
-      className="sticker-overlay"
-      style={{
-        visibility: show ? 'visible' : 'hidden',
-        pointerEvents: show ? 'auto' : 'none',
-      }}
-    >
-      <sticker-forge
-        ref={stickerRef}
-        id={id}
-      />
-    </div>
-  );
-};
-
-const SkillCard = ({ category, idx }) => {
+const SkillCard = ({ category }) => {
   const cardRef = useRef(null);
-
+  const headingRef = useRef(null);
   return (
-    <div
-      className="skill-category"
-      ref={cardRef}
-    >
-      <SkillSticker
-        id={`sticker-${idx}`}
-        cardRef={cardRef}
-      />
-
-      <h3 className="category-title">
-        {category.title}
-      </h3>
-
+    <article className="skill-category" ref={cardRef}>
+      <SkillSticker cardRef={cardRef} headingRef={headingRef} title={category.title} />
+      <h3 className="category-title" ref={headingRef} tabIndex={-1}>{category.title}</h3>
       <div className="skills-list">
-        {category.skills.map((skill, index) => (
-          <div
-            key={index}
-            className="skill-item"
-          >
-            <div className="skill-icon">
-              {React.cloneElement(skill.icon, {
-                'aria-hidden': true,
-              })}
-            </div>
-
-            <span className="skill-name">
-              {skill.name}
-            </span>
-          </div>
-        ))}
+        {category.skills.map((skill) => <div key={skill.name} className="skill-item">
+          <div className="skill-icon">{React.cloneElement(skill.icon, { 'aria-hidden': true })}</div>
+          <span className="skill-name">{skill.name}</span>
+        </div>)}
       </div>
-    </div>
+    </article>
   );
 };
 
@@ -292,12 +103,12 @@ const Skills = () => {
           Competenze
         </h2>
 
+        <p className="skills-intro">Afferra un bordo e strappa lo sticker per scoprire le competenze.</p>
         <div className="skills-grid">
           {categories.map((category, index) => (
             <SkillCard
               key={index}
               category={category}
-              idx={index}
             />
           ))}
         </div>

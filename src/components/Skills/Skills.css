@@ -129,3 +129,29 @@
     min-width: 0;
   }
 }
+.skills-grid { grid-template-columns: repeat(auto-fit,minmax(min(100%,320px),1fr)); align-items: stretch; }
+.skills-intro { color: var(--text-secondary); max-width: 650px; text-align: center; margin: -1.5rem auto 2.5rem; }
+.skill-category { padding-bottom: 4.5rem; }
+.sticker-overlay { inset: 0; width: auto; height: auto; border-radius: inherit; background: transparent; }
+.sticker-cover { position: absolute; inset: 0; display: grid; place-items: center; background: #101820; border: 1px solid #378bcb; border-radius: inherit; pointer-events: none; }
+.sticker-cover::before { content: ''; position: absolute; inset: 12px; border: 1px solid #378bcb; border-radius: 12px; }
+.sticker-cover::after { content: ''; position: absolute; top: 0; right: 0; width: 48px; height: 48px; background: linear-gradient(45deg,transparent 50%,#378bcb 50%); }
+.sticker-cover span { text-align: center; font: 800 clamp(2.8rem,5vw,4.5rem)/1.05 Arial,sans-serif; color: #f8fafc; }
+.sticker-cover strong { color: #38bdf8; }
+.sticker-cover-hidden { visibility: hidden; }
+.sticker-renderer { position: absolute; inset: 0; }
+.sticker-renderer canvas { max-width: 100%; }
+.sticker-actions { position: absolute; bottom: 22px; left: 18px; right: 18px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; z-index: 2; }
+.sticker-actions button, .sticker-restore { border: 1px solid #378bcb; border-radius: 8px; background: #101820; color: #f8fafc; padding: 10px 12px; min-height: 44px; font: inherit; font-size: .8rem; cursor: pointer; }
+.sticker-actions button:hover, .sticker-restore:hover { background: #1c3446; }
+.sticker-actions [role=status] { color: #cbd5e1; font-size: .75rem; text-align: center; }
+.sticker-restore { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+@media (max-width:768px) { .skills-grid { grid-template-columns: 1fr; } }
+
+.skills-list { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .75rem; }
+.skill-item { width: auto; min-width: 0; padding: .9rem .35rem; }
+.skill-name { overflow-wrap: normal; }
+
+.sticker-hint { width: 100%; text-align: center; color: #cbd5e1; font-size: .8rem; }
+.sticker-renderer canvas { cursor: grab; }
+.sticker-renderer canvas:active { cursor: grabbing; }

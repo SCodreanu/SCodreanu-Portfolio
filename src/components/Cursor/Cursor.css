@@ -1,5 +1,6 @@
 .cursor-main {
   --size: 24px;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -13,23 +14,16 @@
   background-color: var(--accent-color);
   box-shadow: 0 0 20px var(--accent-color);
   mix-blend-mode: difference;
-  transition:
-    width 0.3s ease,
-    height 0.3s ease,
-    margin 0.3s ease;
+  transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease;
 }
 
-.cursor-hover {
-  --size: 48px;
-}
+.cursor-main.cursor-visible { display: block; }
+.cursor-hover { --size: 48px; }
 
-@media (pointer: fine) {
-  body {
-    cursor: none;
-  }
+/* Hide the system pointer only while its replacement is actually visible. */
+html.custom-cursor-active,
+html.custom-cursor-active * { cursor: none !important; }
 
-  a,
-  button {
-    cursor: none;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .cursor-main { transition: none; }
 }

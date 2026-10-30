@@ -33,6 +33,7 @@ export default function Projects() {
         <div className="projects-grid">
           {projects.map((project) => (
             <article key={project.id} className="project-card" aria-labelledby={`${project.id}-title`}>
+              <svg className="project-symbol" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16" /></svg>
               <p className="project-category">{project.category}</p>
               <h3 id={`${project.id}-title`} className="project-title">{project.title}</h3>
               <p className="project-description">{project.description}</p>
