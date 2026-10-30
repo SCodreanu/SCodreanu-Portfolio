@@ -8,6 +8,7 @@ const TextTyper = ({ texts, typingSpeed = 150, deletingSpeed = 100, pauseTime = 
   const [currentText, setCurrentText] = useState("");
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     let timerId;
     const fullText = texts[textIndex];
 
@@ -30,10 +31,13 @@ const TextTyper = ({ texts, typingSpeed = 150, deletingSpeed = 100, pauseTime = 
   }, [charIndex, isDeleting, textIndex, texts, typingSpeed, deletingSpeed, pauseTime]);
 
   return (
-    <span className="text-typer">
+    <>
+    <span className="sr-only">{texts.join(' e ')}</span>
+    <span className="text-typer" aria-hidden="true">
       {currentText}
       <span className="cursor">|</span>
     </span>
+    </>
   );
 };
 

@@ -9,15 +9,15 @@ const Footer = () => {
           Sito personale a scopo rappresentativo e non commerciale. Nessuna attività d'impresa esercitata ai sensi dell'art. 35 DPR 633/72.
         </p>
         <div className="footer-links">
-          <a href="public\policy\privacy-policy.html" target="_blank" rel="noopener noreferrer">
+          <a href="/policy/privacy-policy.html" target="_blank" rel="noopener noreferrer">
             Privacy Policy
           </a>
           <span> | </span>
-          <a href="public\policy\cookie-policy.html" target="_blank" rel="noopener noreferrer">
+          <a href="/policy/cookie-policy.html" target="_blank" rel="noopener noreferrer">
             Cookie Policy
           </a>
           <span> | </span>
-          <a href="public\policy\accessibility.html" target="_blank" rel="noopener noreferrer">
+          <a href="/policy/accessibility.html" target="_blank" rel="noopener noreferrer">
             Dichiarazione di Accessibilità
           </a>
         </div>

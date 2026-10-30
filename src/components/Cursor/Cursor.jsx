@@ -7,7 +7,7 @@ const Cursor = () => {
 
   useEffect(() => {
     const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-    if (isTouchDevice) return;
+    if (isTouchDevice || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const cursor = cursorRef.current;
     const mousePos = { x: 0, y: 0 };
@@ -49,7 +49,7 @@ const Cursor = () => {
     };
   }, []);
 
-  return <div className="cursor-main" ref={cursorRef}></div>;
+  return <div className="cursor-main" ref={cursorRef} aria-hidden="true"></div>;
 };
 
 export default Cursor;

@@ -1,43 +1,19 @@
-import "./About.css";
+import './About.css';
 
-const About = () => {
+export default function About() {
   return (
-    <section id="about" className="section about">
+    <section id="about" className="section about" aria-labelledby="about-title">
       <div className="container">
-        <h2 className="section-title">Chi Sono</h2>
+        <h2 id="about-title" className="section-title">Chi sono</h2>
         <div className="about-content">
           <div className="about-text">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-            </p>
-
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
+            <p>Sono Stefan Codreanu e mi dedico allo sviluppo web, con un interesse particolare per React e la progettazione delle interfacce.</p>
+            <p>Nel mio percorso formativo ho lavorato su concept, wireframe e mockup, trasformando le idee in prototipi con componenti riutilizzabili. Con EcoCycle ho sperimentato anche il collegamento tra un frontend React e un backend PHP con database MySQL locale.</p>
+            <p>Il lavoro di gruppo mi ha permesso di esercitare collaborazione, comunicazione e coordinamento. Sono interessato a opportunità di lavoro, stage e collaborazioni in cui continuare a crescere e contribuire a progetti concreti.</p>
           </div>
-
-          <img
-            src="/img/profile_picture.webp"
-            alt="foto profilo di Stefan Codreanu"
-            className="about-image"
-          />
+          <img src="/img/profile_picture.webp" alt="Ritratto di Stefan Codreanu" className="about-image" loading="lazy" />
         </div>
       </div>
     </section>
   );
-};
-
-export default About;
+}

@@ -164,3 +164,14 @@ html {
     gap: 0.5rem;
   }
 }
+@media (max-width: 768px) {
+  .nav-container { min-width: 0; padding: 0 .75rem; }
+  .nav-links { max-width: 100%; gap: 1rem; padding: .5rem; }
+  .nav-links li { flex-shrink: 0; }
+}
+
+@media (max-width: 480px) {
+  .nav-links { gap: .5rem; padding: .25rem; }
+  .nav-links a:not(.btn) { font-size: .68rem; }
+  .logo-img img { width: 24px; height: 24px; }
+}

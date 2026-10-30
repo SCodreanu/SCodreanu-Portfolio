@@ -67,3 +67,10 @@
   color: var(--accent-color);
   letter-spacing: 1px;
 }
+.projects-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.projects-intro { max-width: 680px; margin: -1.5rem auto 2.5rem; text-align: center; color: var(--text-secondary); }
+.project-category { color: var(--accent-hover); font-size: .8rem; margin-bottom: 1rem; }
+.project-details { color: var(--text-secondary); margin-bottom: 1.5rem; }
+.project-details summary { cursor: pointer; color: var(--text-primary); font-weight: 600; }
+.project-details p { margin-top: 1rem; }
+.project-note { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border); font-size: .85rem; color: var(--text-secondary); }

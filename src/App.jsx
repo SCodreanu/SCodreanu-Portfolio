@@ -13,12 +13,13 @@ const Contact = lazy(() => import('./components/Contact/Contact'));
 const App = () => {
   return (
     <>
+      <a className="skip-link" href="#main-content">Vai al contenuto</a>
       <Cursor />
       <header>
         <Navbar />
       </header>
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <About />
         <Suspense fallback={null}>
@@ -28,9 +29,7 @@ const App = () => {
         </Suspense>
       </main>
 
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
 
       <SpeedInsights />
     </>
